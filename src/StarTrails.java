@@ -36,13 +36,13 @@ public class StarTrails extends PApplet {
 				// generate stars randomly with r and theta directly in a circle, centered at the origin
 				float screenRadius = sqrt(width * width / 4 + height * height / 4);
 				
-				float r = random(-screenRadius, screenRadius);
-				float t = random(0, PI);
+				float r = random(0, screenRadius);
+				float t = random(-PI, PI);
 				
 				// initial polar position vector
 				PVector pos = new PVector(r, t);
 				// initial polar velocity vector
-				PVector vel = new PVector(random(-3, 3), random(-0.01f, 0.01f));
+				PVector vel = new PVector(1, 0);
 				// initial polar acceleration vector
 				PVector acc = new PVector(0, 0);
 				
