@@ -47,7 +47,7 @@ public class StarTrail extends PolarParticle {
 			applet.stroke(options.color);
 	
 			float strokeWidth = options.initStrokeWidth;
-			int counter = 0;
+			int counter = 1;
 			PVector prevPos = cartesianHistory.getFirst();
 			
 			for(PVector currPos : cartesianHistory) {
