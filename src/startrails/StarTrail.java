@@ -28,6 +28,9 @@ public class StarTrail extends PolarParticle {
 	public void update() {
 		super.update();
 		
+		if(options.hasModularRPosition)
+			kin.getPos().x %= options.maxR;
+		
 		updateCartesianPos();
 		
 		if(cartesianHistory.size() >= options.historySize)
@@ -41,6 +44,8 @@ public class StarTrail extends PolarParticle {
 		return cartesianPos.set(x * PApplet.cos(y), x * PApplet.sin(y));
 	}
 	
+	// TODO profile and optimize
+	// TODO rewrite so other programmers don't get a brain aneurysm reading this lol
 	@Override
 	public void draw() {
 		if(cartesianHistory.size() != 0) {
@@ -53,7 +58,8 @@ public class StarTrail extends PolarParticle {
 			for(PVector currPos : cartesianHistory) {
 				if(counter % (Math.ceil((double) cartesianHistory.size() / options.linesPerStar)) == 0 || currPos.equals(cartesianHistory.getLast())) {
 					applet.strokeWeight(strokeWidth);
-					applet.line(prevPos.x, prevPos.y, currPos.x, currPos.y);
+					if(PApplet.dist(prevPos.x, prevPos.y, currPos.x, currPos.y) < 500)
+						applet.line(prevPos.x, prevPos.y, currPos.x, currPos.y);
 					prevPos = currPos;
 				}
 				
