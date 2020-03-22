@@ -1,9 +1,9 @@
-package util;
+package kinematics;
 
 import processing.core.PVector;
 
 public class Kinematics {
-	private PVector pos, vel, acc;
+	protected PVector pos, vel, acc;
 	
 	public Kinematics(PVector pos, PVector vel, PVector acc) {
 		this.pos = pos;

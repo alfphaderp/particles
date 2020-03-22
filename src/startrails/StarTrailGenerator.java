@@ -3,8 +3,8 @@ package startrails;
 import java.util.function.IntSupplier;
 import java.util.function.Supplier;
 
+import kinematics.Kinematics;
 import processing.core.PApplet;
-import util.Kinematics;
 import util.PObject;
 
 public class StarTrailGenerator extends PObject {

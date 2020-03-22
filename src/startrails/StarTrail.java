@@ -2,10 +2,10 @@ package startrails;
 
 import java.util.ArrayDeque;
 
+import kinematics.Kinematics;
 import particle.PolarParticle;
 import processing.core.PApplet;
 import processing.core.PVector;
-import util.Kinematics;
 
 public class StarTrail extends PolarParticle {
 	private final StarTrailOptions options;
@@ -27,9 +27,6 @@ public class StarTrail extends PolarParticle {
 	@Override
 	public void update() {
 		super.update();
-		
-		if(options.hasModularRPosition)
-			kin.getPos().x %= options.maxR;
 		
 		updateCartesianPos();
 		

@@ -1,16 +1,11 @@
 package particle;
 
+import kinematics.Kinematics;
 import processing.core.PApplet;
-import util.Kinematics;
 
 public class CartesianParticle extends AbstractParticle {
 	public CartesianParticle(PApplet applet, Kinematics kin) {
 		super(applet, kin);
-	}
-	
-	@Override
-	public void update() {
-		kin.update();
 	}
 	
 	@Override

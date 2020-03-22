@@ -1,11 +1,11 @@
 
+import kinematics.ModRadialPosKinematics;
 import processing.core.PApplet;
 import processing.core.PVector;
 import processing.event.MouseEvent;
 import startrails.StarTrailGenerator;
 import startrails.StarTrailOptions;
 import util.DrawableBase;
-import util.Kinematics;
 
 public class StarTrails extends PApplet {
 	private float cameraX = 0, cameraY = 0, zoom = 1;
@@ -17,6 +17,9 @@ public class StarTrails extends PApplet {
 	public void setup() {
 		// frame rate cap
 		frameRate(30);
+		
+		float minR = random(150, 255), minG = random(150, 255), minB = random(150, 255);
+		float maxR = max(random(220, 255), minR), maxG = max(random(220, 255), minG), maxB = max(random(220, 255), minB);
 		
 		new StarTrailGenerator(this)
 			// number of stars to create
@@ -42,11 +45,13 @@ public class StarTrails extends PApplet {
 				// initial polar position vector
 				PVector pos = new PVector(r, t);
 				// initial polar velocity vector
-				PVector vel = new PVector(1, 0);
+				PVector vel = new PVector(1, 0.01f);
 				// initial polar acceleration vector
 				PVector acc = new PVector(0, 0);
+				// maximum radial position
+				float maxRadialPos = sqrt(width * width / 4 + height * height / 4) * random(0.5f, 1.5f);
 				
-				return new Kinematics(pos, vel, acc);
+				return new ModRadialPosKinematics(pos, vel, acc, maxRadialPos);
 			})
 			.setStarOptionsSupplier(() -> {
 				// number of past positions to remember
@@ -55,21 +60,17 @@ public class StarTrails extends PApplet {
 				int linesPerStar = 10;
 				// color of the star
 				int color = color(
-					255,
-					random(150, 255),
-					random(180, 255)
+					random(minR, maxR),
+					random(minG, maxG),
+					random(minB, maxB)
 				);
 				// initial stroke width of the first line
 				float initStrokeWidth = 8f;
 				// stroke width decays geometrically per frame, this variable is the multiplier by which it decays
 				// lower = faster decay, higher = slower decay, 1 = no decay, >1 = geometric growth instead of decay
 				float strokeWidthDecay = 0.975f;
-				// whether or not to teleport the stars back to the origin if they travel too far away
-				boolean hasModularRPosition = true;
-				// the maximum allowed polar radius before being teleported back
-				float maxR = sqrt(width * width / 4 + height * height / 4);
 				
-				return new StarTrailOptions(historySize, linesPerStar, color, initStrokeWidth, strokeWidthDecay, hasModularRPosition, maxR);
+				return new StarTrailOptions(historySize, linesPerStar, color, initStrokeWidth, strokeWidthDecay);
 			})
 			.generate();
 	}

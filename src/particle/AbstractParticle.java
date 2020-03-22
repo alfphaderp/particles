@@ -1,8 +1,8 @@
 package particle;
 
+import kinematics.Kinematics;
 import processing.core.PApplet;
 import util.DrawableBase;
-import util.Kinematics;
 
 public abstract class AbstractParticle extends DrawableBase {	
 	protected Kinematics kin;
@@ -11,5 +11,10 @@ public abstract class AbstractParticle extends DrawableBase {
 		super(applet);
 		
 		this.kin = kin;
+	}
+	
+	@Override
+	public void update() {
+		kin.update();
 	}
 }

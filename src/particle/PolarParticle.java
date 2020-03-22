@@ -1,7 +1,7 @@
 package particle;
 
+import kinematics.Kinematics;
 import processing.core.PApplet;
-import util.Kinematics;
 
 public class PolarParticle extends AbstractParticle {	
 	public PolarParticle(PApplet applet, Kinematics kin) {
